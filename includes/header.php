@@ -1,4 +1,4 @@
-<!-- <link rel="stylesheet" href="styles\style.css"> -->
+
 <header>
             <a href="index.php" class="brand">XYZ Gadgets</a>
             <div class="menu">
