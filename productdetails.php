@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="styles\productdetails.css">
 <link rel="stylesheet" href="styles\style.css">
+<link rel="stylesheet" href="styles\productdetails.css">
+
 
 
 <?php
@@ -42,14 +43,6 @@
             <div class="content">
                 <p class="brand">Laptop</p>
                 <h2>MacBook Pro</h2>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                </div>
-                <p class="GadgetBrand">Brand: Mac</p>
                 <p class="Price">Price: Php 71,990.00</p>
                 <p>Variation: <select name="var">
 
@@ -65,8 +58,9 @@
                 <button type="button">
                     <i class="fa fa-shopping-cart"></i>
                 Add to cart</button>
-                <button type="button">
-                    Buy Now
+                <button type="button"><i class="fas fa-money-bill-wave"> </i>
+                     Buy Now
+                
                 </button>
             </div>
 
@@ -82,13 +76,6 @@
                     <img src="img\product 6.jpg" alt="">
                     <div class="details">
                         <p>Alienware Area 51 M15X</p>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                        </div>
 
                         <p>PHP 12,000.00</p>
 
@@ -100,13 +87,7 @@
                     <img src="img\product 4.jpg" alt="">
                     <div class="details">
                         <p>Razer Blade 15 Studio Edition</p>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
+                        
 
                         <p>PHP 8,000.00</p>
 
@@ -118,13 +99,7 @@
                     <img src="img\product 8.jpg" alt="">
                     <div class="details">
                         <p>Lenovo ThinkPad P1</p>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
+                        
 
                         <p>PHP 11,000.00</p>
 
@@ -136,14 +111,6 @@
                     <img src="img\smartwatch1.jpg" alt="">
                     <div class="details">
                         <p>ACER Predator 21X </p>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-
                         <p>PHP 10,000.00</p>
 
                     </div>

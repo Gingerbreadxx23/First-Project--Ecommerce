@@ -6,9 +6,9 @@
   require ('./includes\header.php');
   require('./includes\database.php');
   
-  session_start();
-   $_SESSION ['status'];
-  if ($_SESSION['status'] =='invalid' || empty($_SESSION['status']))  {
+session_start();
+  //  $_SESSION ['status'];
+  if ( empty($_SESSION['status']) || $_SESSION['status'] =='invalid' )  {
     //SET INVALID AS DEFAULT
   $_SESSION['status'] = 'invalid';
 }

@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 100%;
+    padding: 10px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .icon {
+    padding: 10px;
+    color: black;
+    min-width: 50px;
+    text-align: center;
+    margin-left: 10px;
+  }
+  
+  
+  
+  input[type=text], input[type=email], input[type=number] {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 10px;
+  
+  }
+  input[type=text]:focus, input[type=email]:focus, input[type=number]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .order {
+    font-size: 20px;
+    letter-spacing: 3px;
+  }
+  
+  
