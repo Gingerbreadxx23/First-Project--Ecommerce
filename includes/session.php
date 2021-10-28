@@ -12,6 +12,7 @@ session_start();
     unset( $_SESSION['cust_postalcode']);
     unset( $_SESSION['cust_country']);
     unset( $_SESSION['cust_city']);
+    unset($_SESSION['cust_id']);
  echo "<script>window.location.href ='./login.php'</script>";
  }
 

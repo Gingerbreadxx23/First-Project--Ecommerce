@@ -26,29 +26,22 @@
         </select>
         <form class="example" >
             <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
         <div class="container4">
         <?php  
                 $query = "SELECT * FROM products ORDER BY product_id ASC";  
                 $result = mysqli_query($connection, $query);  
-                $rowctr =0;
                      while($row = mysqli_fetch_array($result))  
                      {  
          ?>  
                 <form method ="post" action= "productdetails.php" id="shopform">
-                <button  class="container5"  >
-                    <!-- <form method="post" action="cart.php?action=add&id=<?php //echo $row["product_id"]; ?> ">   -->
+                <button  class="container5" type="submit" name="shop_container"  >
+                    
                     <img src="admin\product_images\<?php echo $row['product_img1']; ?>" alt="product image">
                     <h3><?php echo $row['product_name']; ?></h3>
-                    <p>Php <?php echo $row['product_price']; ?></p>
+                    <p>Php <?php echo number_format($row['product_price']); ?></p>
                     <input type ="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>">
-                    <!-- <input type="text" name="quantity" class="form-control" value="1" />   -->
-					<!-- <input type="hidden" name="hidden_image" value="<?php //echo $row["product_img1"]; ?>" />   -->
-                    <!-- <input type="hidden" name="hidden_name" value="<?php //echo $row["product_name"]; ?>" />   -->
-                    <!-- <input type="hidden" name="hidden_price" value="<?php// echo $row["product_price"]; ?>" />   -->
-                    <!-- <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart"  />   -->
                      </a>   
                      </button>
                 </form>
@@ -61,5 +54,6 @@
 
 <?php 
   require ('./includes\footer.php');
+
 ?>
 

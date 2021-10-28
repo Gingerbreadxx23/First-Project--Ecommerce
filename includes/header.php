@@ -11,7 +11,7 @@
               <a href="shop.php">Shop</a>
               <a href="contact.php">Contact</a>
               <a href="login.php"><i class="fas fa-user-alt"></i></a>
-              <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+              <a href="cart.php?shopping_cart" ><i class="fas fa-shopping-cart"></i></a>
             </div>
             <div class="btn">
               <i class="fas fa-bars menu-btn"></i>

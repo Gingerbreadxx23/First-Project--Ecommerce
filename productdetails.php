@@ -9,23 +9,26 @@
 <?php
   require ('./includes\header.php');
   require ('./includes\database.php');
+  session_start();
 
-    $product_id = $_POST['product-id'];
+    if (isset($_POST['shop_container'])){
+    $_SESSION['product_id'] = $_POST['product-id'];
+    $cart_cust_id = $_SESSION['cust_id'];
+    }
+
+   
+
 ?>
 
 <body>
      <button onclick="goBack()">Go Back</button>
 
-    <script>
-        function goBack() {
-          window.history.back();
-      }
-  </script> 
         
   <div class="hero">
     <div class="row">
         <div class="col">
                 <?php 
+                    $product_id = $_SESSION['product_id'];
                         $queryProductdetails = "SELECT * FROM products WHERE product_id =$product_id";
                         $sqlProductdetails = mysqli_query($connection, $queryProductdetails);
                         $rowProductdetails =mysqli_fetch_array($sqlProductdetails);
@@ -56,10 +59,12 @@
                 ?>
                 <p class="brand"><?php echo $rowProductCategory['product_category_title']; ?></p>
                 <h2><?php echo $rowProductdetails['product_name']; ?></h2>
-                <p class="Price">Price: Php <?php echo $rowProductdetails['product_price']; ?></p>
-                <p>Variation: <select name="var">
+                <p class="Price">Price: Php <?php echo number_format($rowProductdetails['product_price']); ?></p>
+              <!-- FORM FOR CART SUBMISSION -->
+                <form method="post" action ="">   
+                <p>Variation: <select name="variation">
                 <?php 
-                //PRODUCT VARIATION
+                               //PRODUCT VARIATION
                     $queryProductVariation = "SELECT * FROM product_item WHERE product_id = $product_id AND product_item_availability= 'Available'" ;
                     $sqlProductVariation = mysqli_query($connection,$queryProductVariation);
                    while( $rowProductVariation = mysqli_fetch_array($sqlProductVariation)){
@@ -68,18 +73,23 @@
                     <option value="<?php echo $rowProductVariation['product_item_id'];?>" ><?php echo $rowProductVariation['product_item_variation'];?></option>
                  <?php  }
                 ?>
-
                 </select></p>
-
+                    
                 <p>Quantity: <input type="number" name="pro_quantity" value="1" min="1"></p>
-
-                <button type="button">
+                <input type= "hidden" name="hidden_image" value= "<?php echo $rowProductdetails['product_img1']; ?>">
+                <input type= "hidden" name="hidden_name" value= "<?php echo $rowProductdetails['product_name']; ?>">
+                <input type= "hidden" name="hidden_price" value= "<?php echo $rowProductdetails['product_price']; ?>">
+                <input type= "hidden" name="hidden_pro_id" value= "<?php echo $product_id; ?>">
+                <input type= "hidden" name="hidden_cust_id" value= "<?php echo  $cart_cust_id; ?>">
+                <input type ="hidden" name= "hidden_pro_price" value ="<?php echo $rowProductdetails['product_price']; ?>">  
+                <button type="submit" name="add_to_cart">
                     <i class="fa fa-shopping-cart"></i>
                 Add to cart</button>
-                <button type="button"><i class="fas fa-money-bill-wave"> </i>
+                <!-- <button type="button"><i class="fas fa-money-bill-wave"> </i>
                      Buy Now
                 
-                </button>
+                </button> -->
+                   </form>
             </div>
 
         </div>
@@ -101,7 +111,7 @@
                                                <div class="details">
                                                    <p><?php echo $rowRelated['product_name']; ?></p>
 
-                                                   <p>PHP <?php echo $rowRelated['product_price']; ?></p>
+                                                   <p>PHP <?php echo number_format($rowRelated['product_price']); ?></p>
                                                    </div>
             </div>
 
@@ -117,6 +127,54 @@
 
 </div>
 <?php 
-  require ('./includes\footer.php');
+  
   require ('./includes\scripts.php');
+
+            echo ' <script>
+             function goBack() {
+               window.location.href = "shop.php";
+            }
+            </script> ';
+
+  if(isset($_POST['add_to_cart'])){
+
+    if(empty($_SESSION['status']) || $_SESSION['status'] == 'invalid'){  
+        
+    echo ' <script>   swal({
+            title: "Item not added!",
+            text: "Please log-in first.",
+            icon: "error",
+            button: "Okay",  
+          }); 
+          </script> ';
+    
+    }else{
+        $cart_cust_id = $_POST ['hidden_cust_id'];
+        $cart_product_id = $_POST['hidden_pro_id'];
+        $cart_product_item_id = $_POST['variation'];
+        $cart_item_quantity = $_POST['pro_quantity'];
+        $cart_pro_price = $_POST['hidden_pro_price'];
+
+        $total= $total + ($cart_pro_price * $cart_item_quantity);
+
+        $queryAddtocart = "INSERT INTO cart VALUES('null', '$cart_cust_id', '$cart_product_id', '$cart_product_item_id','$cart_item_quantity','$total')";
+        $sqlAddtocart = mysqli_query($connection, $queryAddtocart);
+
+        if($sqlAddtocart){
+
+            echo ' <script>   swal({
+                title: "Added to cart!",
+                text: "Successfully added to your shopping cart.",
+                icon: "success",
+                button: false,  
+                timer: 2000,
+              }); 
+              </script> ';
+
+        }
+    }
+
+    }
+
+    require ('./includes\footer.php');
 ?>
