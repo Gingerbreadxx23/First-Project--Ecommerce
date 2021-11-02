@@ -6,7 +6,7 @@
     <img src=".\img\emptycart.png" class="img-fluid ml-5" alt="Sleeping fox">
         <div class="align-self-center">
         <h1 class="">Nothing to see here.</h1>
-        <h6>We may need you to log-in first.</h6>
+        <h6>We may need you to <a href="login.php">log-in </a> first.</h6>
         </div>
     </div>
 </div>

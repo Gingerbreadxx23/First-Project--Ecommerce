@@ -6,6 +6,25 @@
 	 	
 		require('./includes\header.php');
 		require('./includes\database.php');
+		require('./includes\scripts.php');
+
+		if(isset($_POST['cart_remove_item'])){
+			$remove_cart_id = $_POST['hidden_remove'];
+
+			$queryRemoveCart ="DELETE FROM cart WHERE cart_id ='$remove_cart_id'";
+			$sqlRemoveCart = mysqli_query($connection, $queryRemoveCart);
+			
+			if($sqlRemoveCart){
+			   echo ' <script>   swal({
+				   title: "Successfully Removed! ",
+				   text: "The item is removed from your cart",
+				   icon: "success",
+				   button: false,  
+				   timer :1700,
+				 }); 
+				 </script> ';
+			}
+		}
 
 		session_start ();
 		if(empty($_SESSION['status']) || $_SESSION['status'] == 'invalid'){
@@ -60,6 +79,7 @@
 								 		$queryFetchcart = "SELECT * FROM cart WHERE cust_id = '$cart_custid' ";
 										 $sqlFetchcart = mysqli_query($connection, $queryFetchcart);
 										 while($rowFetchcart = mysqli_fetch_array($sqlFetchcart)){ 
+											$cart_id = $rowFetchcart['cart_id'];
 											$cart_pro_id = $rowFetchcart['product_id'];
 											$cart_pro_item_id =$rowFetchcart['product_item_id'];
 									 
@@ -75,7 +95,7 @@
 									   <img src ="admin\product_images\<?php echo $rowcartProduct['product_img1']; ?>">
 								   </td>  
 								   <td><?php  echo $rowcartProduct['product_name']; ?></td>  
-								   <td><?php  echo $rowFetchcart['cart_item_quantity']; ?></td>
+								   <td> <?php  echo $rowFetchcart['cart_item_quantity']; ?></td>
 								   <td>
 									   <?php 
 									   		//PRODUCT_ITEM DATABASE
@@ -94,7 +114,12 @@
 											echo number_format($total);
 								   		 ?>
 									</td>  
-								   <td><button type ="submit" style="border:none; background:none;"><span class="text-danger">Remove</span></button></td>
+								   <td>
+									   <form method ="post" action= "cart.php">
+										<input type ="hidden" name="hidden_remove" value="<?php echo $cart_id; ?>">
+									   <button type ="submit" name="cart_remove_item" style="border:none; background:none;"><span class="text-danger">Remove</span></button>
+									   </form>
+									</td>
 							  </tr>  
 							  <?php 
 									} 
@@ -143,5 +168,6 @@
 	 ?>
 
 	 <?php 
+
 		require('./includes\footer.php');
 	?>

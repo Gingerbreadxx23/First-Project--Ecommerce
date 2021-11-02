@@ -10,18 +10,27 @@
   require ('./includes\header.php');
   require ('./includes\database.php');
   session_start();
+  
+  if (empty($_SESSION['status']) || $_SESSION['status'] == 'invalid' ){
+        
+    unset( $_SESSION['cust_id']);
+}else{
+    $cart_cust_id = $_SESSION['cust_id'];
+}
 
     if (isset($_POST['shop_container'])){
     $_SESSION['product_id'] = $_POST['product-id'];
-    $cart_cust_id = $_SESSION['cust_id'];
-    }
+   
 
+    }   
+   
+  
    
 
 ?>
 
 <body>
-     <button onclick="goBack()">Go Back</button>
+     <button onclick="goBack()">&#8592;Go Back</button>
 
         
   <div class="hero">
@@ -76,6 +85,7 @@
                 </select></p>
                     
                 <p>Quantity: <input type="number" name="pro_quantity" value="1" min="1"></p>
+                <p style ="color:red; font-size:0.7em"> (Once the item is added to your cart, the quantity & variation cannot be changed)</p>
                 <input type= "hidden" name="hidden_image" value= "<?php echo $rowProductdetails['product_img1']; ?>">
                 <input type= "hidden" name="hidden_name" value= "<?php echo $rowProductdetails['product_name']; ?>">
                 <input type= "hidden" name="hidden_price" value= "<?php echo $rowProductdetails['product_price']; ?>">
@@ -137,10 +147,22 @@
             </script> ';
 
   if(isset($_POST['add_to_cart'])){
-
-    if(empty($_SESSION['status']) || $_SESSION['status'] == 'invalid'){  
+       
+        $checkPro = $_POST['hidden_pro_id'];
+        $queryCheckcart ="SELECT * FROM cart WHERE product_id = $checkPro";
+        $sqlCheckcart = mysqli_query($connection, $queryCheckcart);
+        $rowCheckcart = mysqli_fetch_array($sqlCheckcart);
+        if(!empty($rowCheckcart)){
+            echo ' <script>   swal({
+                title: "Item not added!",
+                text: "This item is already on your cart. ",
+                icon: "error",
+                button: "Okay",  
+              }); 
+              </script> ';
+        }elseif(empty($_SESSION['status']) || $_SESSION['status'] == 'invalid'){  
         
-    echo ' <script>   swal({
+         echo ' <script>   swal({
             title: "Item not added!",
             text: "Please log-in first.",
             icon: "error",
