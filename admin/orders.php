@@ -60,12 +60,12 @@
 
                 ?>
                 <form action="orders.php" method= "post">
-                    <input type="submit" style="width: 170px;" name="pending-orders" class="btn btn-primary" value="Pending Orders (<?php echo  $Pendingctr; ?>)">
+                    <input type="submit" style="width: 170px;" name="pending-orders" class="btn btn-secondary" value="Pending Orders (<?php echo  $Pendingctr; ?>)">
                     <input type="submit" style="width: 170px;" name="approved-orders" class="btn btn-primary" value="Approved Orders (<?php echo  $Approvedctr; ?>)"/>
                     <input type="submit" style="width: 170px;" name="processing-orders" class="btn btn-primary" value="Processing Orders (<?php echo  $Processingctr; ?>)"/>
                     <input type="submit" style="width: 170px;" name="ongoing-orders" class="btn btn-primary" value="Ongoing Orders (<?php echo  $Ongoingctr; ?>)"/>
-                    <input type="submit" style="width: 170px;" name="completed-orders" class="btn btn-primary" value="Completed Orders (<?php echo  $Completedctr; ?>)"/>
-                    <input type="submit" style="width: 170px;" name="cancelled-orders"class="btn btn-primary" value="Cancelled Orders (<?php echo  $Cancelledctr; ?>)"/>
+                    <input type="submit" style="width: 170px;" name="completed-orders" class="btn btn-success" value="Completed Orders (<?php echo  $Completedctr; ?>)"/>
+                    <input type="submit" style="width: 170px;" name="cancelled-orders"class="btn btn-danger" value="Cancelled Orders (<?php echo  $Cancelledctr; ?>)"/>
                 </form>
                 </div>
                 <div class="container-fluid ">

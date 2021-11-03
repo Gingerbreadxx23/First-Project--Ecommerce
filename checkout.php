@@ -259,7 +259,7 @@
 
                 if($sqlPlaceorder){
                     //QUERY GETTING ORDER VALUES
-                    $queryGetOrder = "SELECT * FROM orders WHERE cust_id =  '$Ordercust_id' ";
+                    $queryGetOrder = "SELECT * FROM orders WHERE cust_id =  '$Ordercust_id' AND  order_total ='$POordertotal' ";
                     $sqlGetOrder = mysqli_query($connection, $queryGetOrder);
                     $rowGetorder = mysqli_fetch_array($sqlGetOrder);
                       
