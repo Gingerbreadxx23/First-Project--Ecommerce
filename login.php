@@ -3,6 +3,7 @@
 
 
 <?php
+  require ('./includes\scripts.php');
   require ('./includes\header.php');
   require('./includes\database.php');
   
@@ -25,7 +26,13 @@ if ($_SESSION['status']=='valid' && $_SESSION['user']=='customer'){
      $password = trim($_POST['password']);
        
       if (empty($email) || empty($password)){ //checking of credentials
-         echo "<script>alert('Please fill up all fields')</script>";
+        echo '<script>   swal({
+          title: "Empty Field!",
+          text: "Please fill-up all out fields. ",
+          icon: "error",
+          button: "Okay",  
+        }); 
+        </script> ';
           }else{
             $queryValidate = "SELECT * FROM admin_info WHERE admin_email= '$email' AND admin_password = md5('$password')"; //SEARCH ON ADMINS
             $sqlValidate = mysqli_query($connection, $queryValidate);
@@ -61,7 +68,13 @@ if ($_SESSION['status']=='valid' && $_SESSION['user']=='customer'){
                   echo "<script> window.location.href = 'account.php'</script>";
               }else{
                 $_SESSION['status'] = 'Invalid';
-                echo 'Invalid Credential';
+                echo '<script>   swal({
+                  title: "Invalid Credentials",
+                  text: "Please input a valid username or password. ",
+                  icon: "error",
+                  button: "Okay",  
+                }); 
+                </script> ';
               }
              }
          }
