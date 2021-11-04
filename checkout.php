@@ -6,6 +6,7 @@
     box-sizing: border-box;
   }
   
+  
   /* Create two equal columns that floats next to each other */
   .column {
     float: left;
@@ -106,9 +107,40 @@
     background: none;
     padding: 5px 20px;
   }
-  :required {
-    background: red;
+  
+  .popup .overlay{
+    position:fixed;
+    top: 0px;
+    left:0px;
+    width:100vw;
+    height:100vh;
+    background:rgba(0,0,0,0.9);
+    z-index:1;
+    display:none;
   }
+  .popup .content {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background: #fff;
+    width:450px;
+    height:220px;
+    z-index:2;
+    text-align:center;
+    padding:20px;
+    box-sizing: border-box;
+  }
+   .active .overlay{
+    display:block;
+  }
+   .active .content{
+    transition:all 300ms ease-in-out;
+    transform:translate(-50%,-50%) scale(1);
+  }
+  
+
+
 </style>
  <?php 
     require('./includes\header.php');
@@ -119,7 +151,15 @@
       $checkout_cust_id = $_SESSION['cust_id'];
  ?>
  <body>
-
+   
+<script src = "js/paypal.js"></script>
+ <div class= "popup" id= "oti">
+     <div class="overlay" onClick="togglePopup()"></div>
+     <div class="content">
+          <h1>Pay Online</h1>
+          <div id="paypal-button-container"></div>
+     </div>
+</div>
     <?php 
         $queryShipinfo = "SELECT * FROM customers WHERE cust_id ='$checkout_cust_id'";
         $sqlShipinfo = mysqli_query($connection, $queryShipinfo);
@@ -144,10 +184,11 @@
       <input type= "radio" value ="online" name= "payment" id ="paypal">
       <label for="paypal"> <i class="fab fa-cc-paypal icon"></i> PayPal</label> <br/>
     </div>
-    
   </div>
 </div>
 <br/>
+
+
 <div class="row">
   <div class="column">
    <table>
@@ -239,9 +280,13 @@
       <?php 
 
           if(isset($_POST["place_order"])){
+            $POpayment = $_POST['payment'];
+              if($POpayment == "online"){
+                 echo "<script>togglePopup();</script>";
+              }else{
               $POcust_id = $_POST['customerid'];
               $POordertotal = $_POST['ordertotal'];
-              $POpayment = $_POST['payment'];
+             
               $POorderstatus = $_POST['orderstatus'];
               $POorderitem = $_POST['orderitem'];
               $POproduct_id = $_POST['orderproduct'];
@@ -302,6 +347,7 @@
                           
                       }
                 }
+              }
                 
           }
          
