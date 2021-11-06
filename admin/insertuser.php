@@ -5,6 +5,7 @@
    require('./includes/navbar.php'); 
    require('./includes/sidebar.php'); 
    require('./includes/database.php');
+   require('./includes/scripts.php'); 
 
  ?>
 <div id="layoutSidenav_content">
@@ -119,8 +120,16 @@
                                $sqlinsertUser =mysqli_query($connection,$queryinsertUser);
 
                                 if($sqlinsertUser){
-                                         echo "<script>alert('Successfully Added!')</script>";
-                                        echo "<script>window.location.href ='./insertuser.php'</script>"; 
+                                    echo ' <script>   swal({
+                                        title: "Successfully Addded! ",
+                                        text: "You have added an admin successfully",
+                                        icon: "success",
+                                        button: false,  
+                                        timer :2000,
+                                      }).then(function() {
+                                        window.location = "viewuser.php";
+                                    });
+                                      </script> ';
                                 }
                                
                              }
@@ -130,7 +139,7 @@
                          ?>
 
 <?php 
- require('./includes/scripts.php'); 
+
  require('./includes/session.php');
 
  if($_SESSION['user'] !== 'admin'){

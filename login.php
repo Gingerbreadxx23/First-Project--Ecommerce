@@ -41,6 +41,7 @@ if ($_SESSION['status']=='valid' && $_SESSION['user']=='customer'){
              if(mysqli_num_rows($sqlValidate) > 0){//validate credential
                $_SESSION['status'] = 'valid';
                $_SESSION['user'] = 'admin';
+               $_SESSION['admin_id'] = $rowValidate['admin_id'];
                $_SESSION['admin_firstName']= $rowValidate['admin_firstName'];
                $_SESSION['admin_lastName']= $rowValidate['admin_lastName'];
                

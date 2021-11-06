@@ -43,7 +43,6 @@
                         <th scope="col">Image</th>
                         <th scope="col">Price</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Keyword</th>
                         </tr>
                     </thead>
                      <tbody>
@@ -82,7 +81,6 @@
                                  </div>
                                  <td><?php echo $rowviewProduct['product_price'];?></td>
                                  <td><?php echo $rowviewProduct['product_desc'];?></td>
-                                 <td><?php echo $rowviewProduct['product_keyword'];?></td>
                                  <td>
                                      <form action="editproduct.php" method="post">
                                          <button class= "btn btn-success px-4" type="submit" name="editproduct"> Edit</button>
@@ -95,7 +93,6 @@
                                          <input type="hidden" name="editproduct-image3" value="<?php echo $rowviewProduct['product_img3'];?>">
                                          <input type="hidden" name="editproduct-price" value="<?php echo $rowviewProduct['product_price'];?>">
                                          <input type="hidden" name="editproduct-desc" value="<?php echo $rowviewProduct ['product_desc'];?>">
-                                         <input type="hidden" name="editproduct-keyword" value="<?php echo $rowviewProduct['product_keyword'];?>">
                                         
                                      </form>
                                 </td>

@@ -45,7 +45,7 @@
 					<br />  
 					<h3>Cart Details</h3>  
 					<div class="table-responsive">  
-						 <table class="table table-bordered">  
+						 <table class="table ">  
 							  <tr>  
 								   <th width="10%">Product</th>  
 								   <th width="20%">Item Name</th>  

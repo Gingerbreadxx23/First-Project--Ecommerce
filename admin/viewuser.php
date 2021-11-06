@@ -48,6 +48,7 @@
                              $queryviewUser= "SELECT * FROM admin_info";
                              $sqlviewUser = mysqli_query($connection,$queryviewUser);
                              while($rowviewUser =mysqli_fetch_array($sqlviewUser)){
+                                 $adminid = $rowviewUser['admin_id'];
                                  $roleid = $rowviewUser['role_id'];
                              ?>
                                 <tr>
@@ -64,7 +65,13 @@
                                         echo $rowuserRole['admin_role'];
                                     ?>
                                 </td>
-                                 <td><button class= "btn btn-danger px-3"> Delete</button></td> 
+                                
+                                 <td>
+                                 <form action="viewuser.php" method = "post"> 
+                                 <input type="hidden" name="delete_id" value = "<?php echo  $adminid; ?>">    
+                                 <input type ="submit" class="btn btn-danger px-3" name="delete-user" value ="Delete">
+                                 </form>
+                             </td>
                              </tr>
                          <?php $viewpctr++;   } ?>
                             </tbody> 
@@ -83,5 +90,28 @@
  require('./includes/session.php');
  if($_SESSION['user'] !== 'admin'){
     echo "<script>window.location.href ='../login.php'</script>";
+    }   
+
+
+if(isset($_POST['delete-user'])){
+
+    $hiddendeleteid = $_POST['delete_id'];
+
+    $querydeleteUser = "DELETE FROM admin_info WHERE admin_id = '$hiddendeleteid'";
+    $sqldeleteUser = mysqli_query($connection, $querydeleteUser);
+
+    if ($sqldeleteUser){
+        echo '<script>   swal({
+            title: "Successfully Deleted! ",
+            text: "You have deleted an admin successfully",
+            icon: "success",
+            button: false,  
+            timer :2000,
+          }).then(function() {
+            window.location = "viewuser.php";
+        });
+          </script> ';
     }
+
+}
 ?>

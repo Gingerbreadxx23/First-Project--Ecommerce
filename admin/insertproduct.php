@@ -96,13 +96,6 @@
                                     Please input a product description.
                               </div>
                             </div>
-                            <div class="form-group m-3">
-                            <label for="product-keyword">Product Keyword:</label>
-                            <input class="form-control " name="product-keyword" type="text" placeholder="Insert product keyword..." id="product-keyword" required>
-                            <div class="invalid-feedback">
-                                    Please input a product price.
-                              </div>
-                            </div>
                             <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-secondary m-3 p-3" name="add-product"><i class="fas fa-plus"></i> Add Product</button>
                             </div>
@@ -118,8 +111,6 @@
                               $product_name=$_POST['product-title'];
                               $product_price = $_POST['product-price'];
                               $product_desc = $_POST['product-desc'];
-                              $product_keyword = $_POST['product-keyword'];
-
                               $product_img1= $_FILES['product-image1']['name'];
                               $product_img2= $_FILES['product-image2']['name'];
                               $product_img3= $_FILES['product-image3']['name'];
@@ -132,12 +123,20 @@
                               move_uploaded_file($temp_name2,"product_images/$product_img2");
                               move_uploaded_file($temp_name3,"product_images/$product_img3");
 
-                               $queryaddProduct = "INSERT INTO products VALUES (null, '$p_cat_id','$product_name',CURRENT_TIMESTAMP,'$product_img1','$product_img2','$product_img3','$product_price','$product_keyword','$product_desc')";
+                               $queryaddProduct = "INSERT INTO products VALUES (null, '$p_cat_id','$product_name',CURRENT_TIMESTAMP,'$product_img1','$product_img2','$product_img3','$product_price'  ,'$product_desc')";
                               $sqladdProduct =mysqli_query($connection,$queryaddProduct);
                             
                               if($sqladdProduct){
-                              echo "<script>alert('Successfully Added!')</script>";
-                              echo "<script>window.location.href ='./insertproduct.php'</script>";
+                                echo ' <script>   swal({
+                                  title: "Successfully Added! ",
+                                  text: "You have created another user successfully",
+                                  icon: "success",
+                                  button: false,  
+                                  timer :2000,
+                                }).then(function() {
+                                  window.location = "viewuser.php";
+                              });
+                                </script> ';
                             }
                              }
                            ?>

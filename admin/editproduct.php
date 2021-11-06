@@ -16,7 +16,6 @@
         $editproduct_image3 =$_POST['editproduct-image3'];
         $editproduct_price =$_POST['editproduct-price'];
         $editproduct_desc = $_POST['editproduct-desc'];
-        $editproduct_keyword =  $_POST['editproduct-keyword'];
     }
     
  ?>
@@ -114,13 +113,6 @@
                                     Please input a product description.
                               </div>
                             </div>
-                            <div class="form-group m-3">
-                            <label for="product-keyword">Product Keyword:</label>
-                            <input class="form-control " name="product-keyword" type="text" placeholder="Insert product keyword..." value="<?php echo $editproduct_keyword; ?>" id="product-keyword" required>
-                            <div class="invalid-feedback">
-                                    Please input a product price.
-                              </div>
-                            </div>
                             <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-secondary m-3 p-3" name="edit-product"><i class="fas fa-plus"></i> Save Changes</button>
                             </div>
@@ -150,7 +142,7 @@
                   move_uploaded_file($temp_name2,"product_images/$product_img2");
                   move_uploaded_file($temp_name3,"product_images/$product_img3");
           
-                  $queryupdateProduct = "UPDATE products SET  product_name= '$newproduct_title', product_category_id ='$newproduct_cat', product_date= NOW(), product_img1 = '$product_img1', product_img2 = '$product_img2', product_img3 = '$product_img3', product_price ='$newproduct_price', product_keyword ='$newproduct_keyword', product_desc='$newproduct_desc' WHERE product_id= '$newproduct_id'";
+                  $queryupdateProduct = "UPDATE products SET  product_name= '$newproduct_title', product_category_id ='$newproduct_cat', product_date= NOW(), product_img1 = '$product_img1', product_img2 = '$product_img2', product_img3 = '$product_img3', product_price ='$newproduct_price', product_desc='$newproduct_desc' WHERE product_id= '$newproduct_id'";
                   $sqlupdateProduct = mysqli_query($connection,$queryupdateProduct);
           
                   if($sqlupdateProduct){

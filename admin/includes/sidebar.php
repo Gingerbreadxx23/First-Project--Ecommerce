@@ -81,7 +81,7 @@ session_start();
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="insertuser.php">Insert User</a>
                                     <a class="nav-link" href="viewuser.php">View Users</a>
-                                    <a class="nav-link" href="#">Edit User Profile</a>
+                                    <a class="nav-link" href="edituser.php">Edit User Profile</a>
                                 </nav>
                             </div>
                         </div>
