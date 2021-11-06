@@ -5,6 +5,7 @@
    require('./includes/navbar.php'); 
    require('./includes/sidebar.php'); 
    require('./includes/database.php');
+   require('./includes/scripts.php');
 
  ?>
 <div id="layoutSidenav_content">
@@ -69,7 +70,7 @@
                             </div>
                             <div class="form-group m-3">
                              <label for="product-img3">Product Image 3:</label>
-                             <input class="form-control"name="product-image3" type="file"  id="product-img3"  >
+                             <input class="form-control"name="product-image3" type="file"  id="product-img3"   >
                              <div class="invalid-feedback">
                                     Please upload a product Image.
                               </div>
@@ -109,11 +110,13 @@
                             if(isset($_POST['add-product'])){
                               $p_cat_id = $_POST['select-category'];
                               $product_name=$_POST['product-title'];
+                              $product_availability = "Available";
                               $product_price = $_POST['product-price'];
                               $product_desc = $_POST['product-desc'];
                               $product_img1= $_FILES['product-image1']['name'];
                               $product_img2= $_FILES['product-image2']['name'];
                               $product_img3= $_FILES['product-image3']['name'];
+                            
 
                               $temp_name1 = $_FILES['product-image1']['tmp_name'];
                               $temp_name2 = $_FILES['product-image2']['tmp_name'];
@@ -123,18 +126,18 @@
                               move_uploaded_file($temp_name2,"product_images/$product_img2");
                               move_uploaded_file($temp_name3,"product_images/$product_img3");
 
-                               $queryaddProduct = "INSERT INTO products VALUES (null, '$p_cat_id','$product_name',CURRENT_TIMESTAMP,'$product_img1','$product_img2','$product_img3','$product_price'  ,'$product_desc')";
+                               $queryaddProduct = "INSERT INTO products VALUES (null, '$p_cat_id','$product_name','$product_availability', CURRENT_TIMESTAMP,'$product_img1','$product_img2','$product_img3','$product_price','$product_desc')";
                               $sqladdProduct =mysqli_query($connection,$queryaddProduct);
                             
                               if($sqladdProduct){
                                 echo ' <script>   swal({
                                   title: "Successfully Added! ",
-                                  text: "You have created another user successfully",
+                                  text: "You have addded a product successfully",
                                   icon: "success",
                                   button: false,  
                                   timer :2000,
                                 }).then(function() {
-                                  window.location = "viewuser.php";
+                                  window.location = "viewproduct.php";
                               });
                                 </script> ';
                             }
@@ -143,9 +146,9 @@
 
 
 <?php 
- require('./includes/scripts.php'); 
+ 
  require('./includes/session.php');
-
+   
  if($_SESSION['user'] !== 'admin'){
   echo "<script>window.location.href ='../login.php'</script>";
   }

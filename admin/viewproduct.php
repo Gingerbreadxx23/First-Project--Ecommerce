@@ -97,7 +97,7 @@
                                      </form>
                                 </td>
                                  <!-- DELETE -->
-                                 <td><form action="deleteproduct.php" method="post">
+                                 <td><form action="viewproduct.php" method="post">
                                     <input class=" btn btn-danger px-3" type="submit" name="delete-product" value="Delete">
                                     <input type="hidden" name="delete-ID" value="<?php echo $rowviewProduct['product_id']?>">
                                 </form> 
@@ -117,6 +117,32 @@
 
 <?php 
  require('./includes/scripts.php'); 
+ 
+
+ if(isset($_POST['delete-product'])){
+    $deleteID = $_POST['delete-ID'];
+    
+    $queryDeleteProduct = "DELETE FROM products WHERE product_id = '$deleteID'";
+    $sqlDeleteProduct =mysqli_query($connection,$queryDeleteProduct);
+
+    if($sqlDeleteProduct){
+        echo ' <script>   swal({
+            title: "Product Deleted! ",
+            text: "You have deleted a product successfully",
+            icon: "success",
+            button: false,  
+            timer :2000,
+          }).then(function() {
+            window.location = "viewproduct.php";
+        });
+          </script> ';
+    }
+}
+
+if($_SESSION['user'] !== 'admin'){
+    echo "<script>window.location.href ='../login.php'</script>";
+    }
+    
  require('./includes/session.php');
  if($_SESSION['user'] !== 'admin'){
     echo "<script>window.location.href ='../login.php'</script>";

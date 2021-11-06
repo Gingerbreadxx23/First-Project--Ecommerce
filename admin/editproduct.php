@@ -5,7 +5,7 @@
    require('./includes/navbar.php'); 
    require('./includes/sidebar.php'); 
    require('./includes/database.php');
-
+   require('./includes/scripts.php'); 
     if(isset($_POST['editproduct'])){
         $editproduct_id = $_POST['editproduct-id'];
         $editproduct_cat = $_POST['editproduct-cat'];
@@ -78,7 +78,7 @@
                             <div class="form-group m-3">
                               <label for="product-img2">Product Image 2:</label>
                               <img width="70" height="70" src ="./product_images/<?php echo $editproduct_image2; ?>" alt= "<?php echo $editproduct_image2; ?>"/>
-                              <input class="form-control" name="product-image2" type="file"   id="product-img2"  required>
+                              <input class="form-control" name="product-image2" type="file"   id="product-img2"  >
                               <div class="invalid-feedback">
                                     Please upload a product Image.
                               </div>
@@ -86,7 +86,7 @@
                             <div class="form-group m-3">
                              <label for="product-img3">Product Image 3:</label>
                              <img width="70" height="70" src ="./product_images/<?php echo $editproduct_image3; ?>" alt= "<?php echo $editproduct_image3; ?>"/>
-                             <input class="form-control"name="product-image3" type="file"   id="product-img3" required >
+                             <input class="form-control"name="product-image3" type="file"   id="product-img3"  >
                              <div class="invalid-feedback">
                                     Please upload a product Image.
                               </div>
@@ -146,8 +146,17 @@
                   $sqlupdateProduct = mysqli_query($connection,$queryupdateProduct);
           
                   if($sqlupdateProduct){
-                      echo "<script>alert('Successfully Updated')</script>";
-                      echo "<script>window.location.href ='./viewproduct.php'</script>";
+                    echo ' <script>   swal({
+                      title: "Changes saved ! ",
+                      text: "You have edited a product successfully",
+                      icon: "success",
+                      button: false,  
+                      timer :2000,
+                    }).then(function() {
+                      window.location = "viewproduct.php";
+                  });
+                    </script> ';
+
                   }
               }
             
@@ -155,7 +164,7 @@
 
 
 <?php 
- require('./includes/scripts.php'); 
+
  require('./includes/session.php');
 
  if($_SESSION['user'] !== 'admin'){
