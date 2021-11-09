@@ -6,8 +6,11 @@
 <?php
   require ('./includes\header.php');
   require ('./includes\session.php');//Avoid access after logging out
+  require ('./includes\database.php');
+  require ('./includes\scripts.php');
 
-  $firstname = $_SESSION['cust_firstName'];
+ $custid = $_SESSION['cust_id'];
+ $firstname = $_SESSION['cust_firstName'];
  $lastname =  $_SESSION['cust_lastName'];
  $email    =  $_SESSION['cust_email'];
  $password  =  $_SESSION['cust_password'];
@@ -16,6 +19,25 @@
  $postalcode  =  $_SESSION['cust_postalcode'];
  $country  =  $_SESSION['cust_country'];
  $city   =  $_SESSION['cust_city'];
+
+ if(isset($_POST['cancel-order'])){
+
+   $order_id = $_POST['hiddenorder-id'];
+
+   $querycancelOrder = "UPDATE orders SET order_status = 'cancelled' WHERE order_id='$order_id'";
+   $sqlcancelOrder = mysqli_query($connection, $querycancelOrder);
+
+   if($sqlcancelOrder){
+    echo ' <script>   swal({
+      title: "Order has been cancelled! ",
+      text: "The order is cancelled successfully",
+      icon: "success",
+      button: false,  
+      timer :1700,
+    }); 
+    </script> ';
+   }
+ }
  
 ?>
 <body>
@@ -41,7 +63,7 @@
                                 <li id="history"><a href="#">Order History</a></li>
                                 <li id="cancelrefunded"><a href="#">Cancelled/Refunded Order</a></li>
                                 <form method= "post" action="logout.php">
-                                <li><input type= submit value = "Logout" style = "border:none; float:left; background:none; font-size:1.1em"></li>
+                                <li><input type= submit value = "Logout" style = "border:none; float:left; background:none; font-size:1.1em; color:red;"></li>
                                 </form>
                             </ul>
                         </div>
@@ -56,11 +78,13 @@
                             <div class="row">
                               <div class="column">
                                 <h2>Personal Information</h2><br/>
-                                <input type="text" value="Cristina Deleon" readonly/>
-                                <input type="text" value="56 C. Santos st. Ugong Pasig City" readonly/>
-                                <input type="email" value="tintin.deleon26@gmail.com" readonly/>
-                                <input type="number" value="09206770630" readonly/>
+                                <input type="text" value="<?php echo $firstname . " " . $lastname; ?>" readonly/>
+                                <input type="text" value="<?php echo $address . " " . $city . " " . $country . " " . $postalcode; ?>" readonly/>
+                                <input type="email" value="<?php echo $email; ?>" readonly/>
+                                <input type="number" value="0<?php echo $phone; ?>" readonly/>
+                                <form action= "editprofile.php" method="post">
                                 <input type="submit" value="Edit Information" readonly/>
+                                </form>
                               </div>
                           </div>
                         </div>
@@ -75,13 +99,50 @@
                                <th> Total </th>
                                <th> Status </th>
                                <th> Action </th>
+                              <!-- ORDER DATABASE  -->
+                              <?php 
+                                    $queryorderStatus = "SELECT * FROM orders WHERE order_status NOT IN('cancelled','completed') AND cust_id= '$custid'";
+                                    $sqlorderStatus = mysqli_query($connection, $queryorderStatus);
+                                    while($roworderStatus = mysqli_fetch_array($sqlorderStatus)){
+                                      $order_id = $roworderStatus['order_id'];
 
-                               <tr>
-                                 <td><small>AERO 1pc/s</small></td>
-                                 <td align="center"><small> 10,000 </small></td>
-                                 <td align="center"><small> Pending </small></td>
-                                 <td align="center" style="color: red;"><small><a href ="#"> Cancel </a></small></td>
+                                      $queryproductStatus = "SELECT * FROM order_items WHERE order_id = '$order_id'";
+                                      $sqlproductStatus = mysqli_query($connection, $queryproductStatus);
+                                      
+                                ?>
+                                <tr>
+                                 <td>
+                                 <?php 
+                                     while($rowproductStatus = mysqli_fetch_array($sqlproductStatus)){
+                                      $product_id  = $rowproductStatus['product_id'];
+                                      $productquantity = $rowproductStatus['order_item_quantity'];
+                                      $variant = $rowproductStatus['order_item_variation'];
+
+                                      $querygetproduct = "SELECT * FROM products WHERE product_id='$product_id'";
+                                      $sqlgetproduct = mysqli_query($connection, $querygetproduct);
+                                      while($rowgetproduct = mysqli_fetch_array($sqlgetproduct)){
+                                      
+                                  ?>
+                                   <small><?php echo $rowgetproduct['product_name'] . "- $variant -" . "(" . $productquantity; ?>pc/s) </small><br>
+                                  
+                                 <?php }} ?>
+                                 </td>
+                                 <?php 
+                                  // CANCEL BUTTON
+                                       $cancelstatus =$roworderStatus['order_status'];
+                                 ?>
+                                 <td align="center"><small>Php  <?php echo number_format($roworderStatus['order_total']);?></small></td>
+                                 <td align="center"><small> <?php echo strtoupper($roworderStatus['order_status']);?> </small></td>
+                                 <form method= "post">
+                                 <td align="center" ><small><input  type = "submit" <?php if ($cancelstatus == 'processing' || $cancelstatus == 'shipped'){ ?> disabled <?php   } ?>style=" border:none; background:none; text-decoration: underline;" value="Cancel" name ="cancel-order" >
+                                                            <input type = "hidden" name= "hiddenorder-id" value= "<?php echo $order_id; ?>">
+                                </small></td>
+                                 </form>
                                </tr>
+                                <?php
+                                    }
+                              ?>
+                               
                              </table>
                             </div>
                         </div>
@@ -91,41 +152,99 @@
                       <div class="orderhistory" id="orderhistory">
                         <div class="row">
                           <div class="column">
-                            <h2>Order Status</h2><br/>
+                            <h2>Order History</h2><br/>
                             <table>
                              <th align="left"> Product </th>
                              <th> Total </th>
                              <th> Status </th>
+                             <?php 
+                                    $queryorderStatus = "SELECT * FROM orders WHERE cust_id= '$custid' AND order_status= 'completed'";
+                                    $sqlorderStatus = mysqli_query($connection, $queryorderStatus);
+                                    while($roworderStatus = mysqli_fetch_array($sqlorderStatus)){
+                                      $order_id = $roworderStatus['order_id'];
 
-                             <tr>
-                               <td><small>AERO 1pc/s</small></td>
-                               <td align="center"><small> 10,000 </small></td>
-                               <td align="center"><small> Delivered </small></td>
-                             </tr>
-                           </table>
-                          </div>
+                                      $queryproductStatus = "SELECT * FROM order_items WHERE order_id = '$order_id'";
+                                      $sqlproductStatus = mysqli_query($connection, $queryproductStatus);
+                                      
+                                ?>
+                                <tr>
+                                 <td>
+                                 <?php 
+                                     while($rowproductStatus = mysqli_fetch_array($sqlproductStatus)){
+                                      $product_id  = $rowproductStatus['product_id'];
+                                      $productquantity = $rowproductStatus['order_item_quantity'];
+                                      $variant = $rowproductStatus['order_item_variation'];
+
+                                      $querygetproduct = "SELECT * FROM products WHERE product_id='$product_id'";
+                                      $sqlgetproduct = mysqli_query($connection, $querygetproduct);
+                                      while($rowgetproduct = mysqli_fetch_array($sqlgetproduct)){
+                                      
+                                  ?>
+                                   <small><?php echo $rowgetproduct['product_name'] . "- $variant -" . "(" . $productquantity; ?>pc/s) </small><br>
+                                  
+                                 <?php }} ?>
+                                 </td>
+                                 <td align="center"><small>Php  <?php echo number_format($roworderStatus['order_total']);?></small></td>
+                                 <td align="center"><small> <?php echo strtoupper($roworderStatus['order_status']);?> </small></td>
+                               </tr>
+                                <?php
+                                    }
+                              ?>
+                               
+                             </table>
+                            </div>
+                        </div>
                       </div>
-                    </div>
+
 
                     <!-- display canncelled/refunded -->
                   <div class="orderhistory" id="cancelledrefundedorder">
                     <div class="row">
                       <div class="column">
-                        <h2>Order Status</h2><br/>
+                        <h2>Cancelled Orders</h2><br/>
                         <table>
                          <th align="left"> Product </th>
                          <th> Total </th>
                          <th> Status </th>
 
-                         <tr>
-                           <td><small>AERO 1pc/s</small></td>
-                           <td align="center"><small> 10,000 </small></td>
-                           <td align="center"><small> Cancelled </small></td>
-                         </tr>
-                       </table>
+                         <?php 
+                                    $queryorderStatus = "SELECT * FROM orders WHERE cust_id= '$custid' AND order_status= 'cancelled'";
+                                    $sqlorderStatus = mysqli_query($connection, $queryorderStatus);
+                                    while($roworderStatus = mysqli_fetch_array($sqlorderStatus)){
+                                      $order_id = $roworderStatus['order_id'];
+
+                                      $queryproductStatus = "SELECT * FROM order_items WHERE order_id = '$order_id'";
+                                      $sqlproductStatus = mysqli_query($connection, $queryproductStatus);
+                                      
+                                ?>
+                                <tr>
+                                 <td>
+                                 <?php 
+                                     while($rowproductStatus = mysqli_fetch_array($sqlproductStatus)){
+                                      $product_id  = $rowproductStatus['product_id'];
+                                      $productquantity = $rowproductStatus['order_item_quantity'];
+                                      $variant = $rowproductStatus['order_item_variation'];
+
+                                      $querygetproduct = "SELECT * FROM products WHERE product_id='$product_id'";
+                                      $sqlgetproduct = mysqli_query($connection, $querygetproduct);
+                                      while($rowgetproduct = mysqli_fetch_array($sqlgetproduct)){
+                                      
+                                  ?>
+                                   <small><?php echo $rowgetproduct['product_name'] . "- $variant -" . "(" . $productquantity; ?>pc/s) </small><br>
+                                  
+                                 <?php }} ?>
+                                 </td>
+                                 <td align="center"><small>Php  <?php echo number_format($roworderStatus['order_total']);?></small></td>
+                                 <td align="center"><small> <?php echo strtoupper($roworderStatus['order_status']);?> </small></td>
+                               </tr>
+                                <?php
+                                    }
+                              ?>
+                               
+                             </table>
+                            </div>
+                        </div>
                       </div>
-                  </div>
-                </div>
 
                       </div>
                     <!-- end display Information -->

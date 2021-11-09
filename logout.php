@@ -9,6 +9,7 @@
    unset(  $_SESSION['cust_password']);
    unset( $_SESSION['cust_phone']);
    unset( $_SESSION['cust_address']);
+   unset( $_SESSION['barangay']);
    unset( $_SESSION['cust_postalcode']);
    unset( $_SESSION['cust_country']);
    unset( $_SESSION['cust_city']);

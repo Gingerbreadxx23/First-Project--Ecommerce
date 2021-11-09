@@ -4,6 +4,8 @@
 <?php
   require ('./includes\header.php');
   require ('./includes\database.php');
+  require ('./includes\scripts.php');
+
 
  if(isset($_POST['register'])){ // GET VALUES OF INPUT
    $firstname = $_POST['firstname'];
@@ -13,23 +15,47 @@
    $confirmpass=$_POST['confirmpass'];
    $phone = $_POST['phone'];
    $address = $_POST['address'];
+   $barangay = $_POST['barangay'];
    $postalcode = $_POST['postalcode'];
    $city = $_POST['city'];
    $country = $_POST['country'];
    
    //VALIDATE INPUTS'
    if(empty($firstname) || empty($lastname) || empty( $email)|| empty($password)|| empty( $phone)|| empty($address)|| empty($postalcode)|| empty($city)|| empty($country) ){
-     echo 'Please fill out all fields';
+    echo ' <script>   swal({
+      title: "Empty Field!",
+      text: "Please fill out all fields.",
+      icon: "error",
+      button: "Okay",
+    });  </script> ';
    }else if ($password!== $confirmpass){
-     echo 'Password do not match!';
+    echo ' <script>   swal({
+      title: "Password does not match",
+      text: "Make sure you confirm the same password.",
+      icon: "error",
+      button: "Okay",
+    });  </script> ';
    }else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo "Invalid email format";
+    echo ' <script>   swal({
+      title: "Invalid Email format",
+      text: "Please input a valid email",
+      icon: "error",
+      button: "Okay",
+    });  </script> ';
    } else{
-    $queryCreate = "INSERT INTO customers VALUES (null,'$firstname',' $lastname','$email',md5('$password'),'$phone','$address','$postalcode','$country','$city')";
+    $queryCreate = "INSERT INTO customers VALUES (null,'$firstname',' $lastname','$email',md5('$password'),'$phone','$address', '$barangay','$postalcode','$country','$city')";
     $sqlCreate =mysqli_query($connection,$queryCreate);
 
-    echo '<script>alert("Successfully Created!")</script>';
-    echo '<script>window.location.href = "account.php"</script>';
+    echo ' <script>   swal({
+      title: "Registration Successful! ",
+      text: "You have created an account successfully.",
+      icon: "success",
+      button: false,  
+      timer :2000,
+    }).then(function() {
+      window.location = "login.php";
+  });
+    </script> ';
 
    }
   
@@ -42,7 +68,7 @@
       <section class="create-account-section">
         <form action="createaccount.php" method="POST">
             <div class="create-account-container">
-             <div class="create-account-small-contain">
+             <div class="create-account-small-contain" style = "height:95%;">
                  <h1>Create Account</h1>
                   <div class="register-account-txtbox">
                        <input class="two-lines" type="text" placeholder="First Name" name="firstname" >
@@ -51,9 +77,10 @@
                        <input class="full-width" type="password" placeholder="Password" name="password" >
                        <input class="full-width" type="password" placeholder="Confirm password" name="confirmpass" >
                        <input class="full-width"  type="number" placeholder="Phone Number" name="phone" >
-                       <input class="full-width" type="text" placeholder="Address(Street & Barangay)" name="address" >
-                       <input class="two-lines" type="number" placeholder="Postal Code" name="postalcode" >
+                       <input class="full-width" type="text" placeholder="Address" name="address" >
+                       <input class="full-width" type="text" placeholder="Barangay" name="barangay" >
                        <input class="two-lines" type="text" placeholder="City" name="city" >
+                       <input class="two-lines" type="number" placeholder="Postal Code" name="postalcode" >
                        <select class="full-width" name="country" id="country">
                         <option value="Philippines">Philippines</option>
                       </select>

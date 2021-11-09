@@ -62,6 +62,7 @@ if ($_SESSION['status']=='valid' && $_SESSION['user']=='customer'){
                     $_SESSION['cust_password']= $rowcustValidate['cust_password'];
                     $_SESSION['cust_phone']= $rowcustValidate['cust_phone'];
                     $_SESSION['cust_address']= $rowcustValidate['cust_address'];
+                    $_SESSION['barangay']= $rowcustValidate['cust_barangay'];
                     $_SESSION['cust_postalcode']= $rowcustValidate['cust_postalcode'];
                     $_SESSION['cust_country']= $rowcustValidate['cust_country'];
                     $_SESSION['cust_city']= $rowcustValidate['cust_city'];

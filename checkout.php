@@ -179,9 +179,9 @@
   <div class="column-right">
     <div class="">
       <i class="fas fa-cash-register icon"></i><span class="title">Payment Method</span><br/> 
-      <input type= "radio" value ="offline" name= "payment" id ="COD" required>
+      <input type= "radio" value ="Cash on Delivery" name= "payment" id ="COD" required>
       <label for="COD" style ="margin-right: 20px;"> <i class="fas fa-truck icon"></i> Cash on Delivery</label> <br/>
-      <input type= "radio" value ="online" name= "payment" id ="paypal">
+      <input type= "radio" value ="Paypal" name= "payment" id ="paypal">
       <label for="paypal"> <i class="fab fa-cc-paypal icon"></i> PayPal</label> <br/>
     </div>
   </div>
