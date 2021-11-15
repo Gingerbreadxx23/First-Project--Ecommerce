@@ -24,6 +24,7 @@
             </div><!-- row finish -->
 
             
+            
                 <div class="container-fluid"><!-- col 3 beg -->
                 <div class="card mb-4">
                 <div class="card-header">
@@ -82,8 +83,13 @@
                                  <td><?php echo $rowviewProduct['product_price'];?></td>
                                  <td><?php echo $rowviewProduct['product_desc'];?></td>
                                  <td>
+                                 <div class="btn-group">
+                                               <button class="btn btn-secondary btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Actions
+                                               </button>
+                                    <div class="dropdown-menu">
                                      <form action="editproduct.php" method="post">
-                                         <button class= "btn btn-success px-4" type="submit" name="editproduct"> Edit</button>
+                                         <button class= "dropdown-item" type="submit" name="editproduct"> Edit</button>
                                          <input type="hidden" name="editproduct-id" value="<?php echo $rowviewProduct['product_id'];?>">
                                          <input type="hidden" name="editproduct-cat" value="<?php echo $rowviewCategory['product_category_title'];?>">
                                          <input type="hidden" name="editproduct-cat-id" value="<?php echo $rowviewCategory['product_category_id'];?>">
@@ -95,12 +101,19 @@
                                          <input type="hidden" name="editproduct-desc" value="<?php echo $rowviewProduct ['product_desc'];?>">
                                         
                                      </form>
-                                </td>
+                    
                                  <!-- DELETE -->
-                                 <td><form action="viewproduct.php" method="post">
-                                    <input class=" btn btn-danger px-3" type="submit" name="delete-product" value="Delete">
+                                 <form action="viewproduct.php" method="post">
+                                    <button class= "dropdown-item" type="submit" name="delete-product">Delete </button>
                                     <input type="hidden" name="delete-ID" value="<?php echo $rowviewProduct['product_id']?>">
                                 </form> 
+
+                                <form action="viewproduct.php" method="post">
+                                    <button class= "dropdown-item" type="submit" name="product-unavailable">Change product availability</button>
+                                    <input type="hidden" name="PA-ID" value="<?php echo $rowviewProduct['product_id']?>">
+                                </form> 
+                                    </div>
+                                    </div>
                                  </td> 
                                 </tr>
 
@@ -123,8 +136,9 @@
     $deleteID = $_POST['delete-ID'];
     
     $queryDeleteProduct = "DELETE FROM products WHERE product_id = '$deleteID'";
+    $queryDeleteItem = "DELETE FROM product_item WHERE product_id = '$deleteID'";
     $sqlDeleteProduct =mysqli_query($connection,$queryDeleteProduct);
-
+    $sqlDeleteItem = mysqli_query($connection, $queryDeleteItem);
     if($sqlDeleteProduct){
         echo ' <script>   swal({
             title: "Product Deleted! ",
@@ -136,6 +150,50 @@
             window.location = "viewproduct.php";
         });
           </script> ';
+    }
+}
+
+if(isset($_POST['product-unavailable'])){
+    $PAid = $_POST['PA-ID'];
+
+    $querygetAV = "SELECT product_availability FROM products WHERE product_id = ' $PAid'";
+    $sqlgetAV = mysqli_query($connection, $querygetAV);
+    $rowgetAV = mysqli_fetch_array($sqlgetAV);
+
+    if($rowgetAV['product_availability'] == 'Available'){
+
+        $queryproUnavail= "UPDATE products SET product_availability = 'Unavailable' WHERE product_id = ' $PAid'";
+        $sqlproUnavail = mysqli_query($connection,$queryproUnavail);
+
+        if($sqlproUnavail){
+            echo ' <script>   swal({
+                title: "Successfully Changed ",
+                text: "Product availability changed.    ",
+                icon: "success",
+                button: false,  
+                timer :1700,
+            }).then(function() {
+                window.location = "viewproduct.php";
+            });
+              </script> ';
+        }
+    }else if ($rowgetAV['product_availability'] == 'Unavailable') {
+        $queryproAvail= "UPDATE products SET product_availability = 'Available' WHERE product_id = '$PAid'";
+        $sqlproAvail = mysqli_query($connection,$queryproAvail);
+
+        if($sqlproAvail){
+            echo ' <script>   swal({
+                title: "Successfully Changed ",
+                text: "Product availability changed.    ",
+                icon: "success",
+                button: false,  
+                timer :1700,
+            }).then(function() {
+                window.location = "viewproduct.php";
+            });
+              </script> ';
+        }
+
     }
 }
 

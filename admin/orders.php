@@ -133,6 +133,11 @@
         if($sqlProcess){
           echo "<script>alert('Order is being processed!')</script>";
           echo "<script>window.location.href ='./orders.php'</script>";
+
+        //   FOR INVENTORY 
+
+        $querygetorderQ = "SELECT * FROM order_items WHERE order_id = '$ordercode'";
+        $sqlgetorderQ = mysqli_query($connection,$querygetorderQ);
         }
       } 
 //PROCESSING SHIPPED BUTTON

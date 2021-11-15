@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GadgetStore</title>
+    <link rel="stylesheet" href="styles\app.css">
+    <link rel="stylesheet" href="styles\grid.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
           <!-- HEADER-->
           <header>
@@ -27,13 +30,12 @@
   </head>
   
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 *{
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
-
  body{
   min-height: 100%;
 }
@@ -56,7 +58,6 @@
   
   
 }
-
 /*NAVIGATION */
 
 header{
@@ -148,67 +149,6 @@ display: none;
   line-height: 50px;
   
   }
-/* -------------CATEGORY-------*/
-.feature-cat{
-  margin: 100px 0;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  flex-direction: row;
-}
-.feature-cat img{
-  width:300px;
-  height:400px;
-  padding:20px;
-  opacity: 1;
-  display: block;
-  transition: .4s;
-  backface-visibility: hidden;
-}
-.feature-cat .first-category,.second-category,.third-category{
-  position: relative;
-  width: 50%;
-}
-
-.feature-cat .first-category:hover img{
-  opacity: 0.3;
-}
-.feature-cat .first-category:hover .middle{
-  opacity: 1;
-}
-.feature-cat .second-category:hover img{
-  opacity: 0.3;
-}
-.feature-cat .second-category:hover .middle{
-  opacity: 1;
-}
-.feature-cat .third-category:hover img{
-  opacity: 0.3;
-}
-.feature-cat .third-category:hover .middle{
-  opacity: 1;
-}
-
-.feature-cat  .middle {
-    transition: .5s ;
-    opacity: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%)
-}
-.feature-cat .category-text {
-  background: grey;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
-}
-.small-container{
-  max-width: 1080px;
-  margin-left: 11%;
-}
-
 /* -------ADS------*/
 .advertisement{
   display: flex;
@@ -319,32 +259,100 @@ display: none;
       <h1>Quality with   Perfection</h1>
       <a href="shop.php" class="btns">Explore now</a>
     </section>
- 
-    <!-- FEATURED CAT SECTION-->
-    <section class="category">
-    <div class="small-container">
-      <div class="feature-cat">
-        <div class="first-category">
-          <img src="img\Category1.jpg" alt="">
-        <div class="middle">
-          <div class="category-text">Category 1</div>
+
+     <!-- hero section -->
+     <div class="hero">
+        <div class="slider">
+            <div class="container">
+                <!-- slide item -->
+                <div class="slide active">
+                    <div class="info">
+                        <div class="info-content">
+                            <h3 class="top-down">
+                                AERO
+                            </h3>
+                            <h2 class="top-down trans-delay-0-2">
+                                Next-gen design
+                            </h2>
+                            <p class="top-down trans-delay-0-4">
+                                The Best Laptop for Content CreationBest lightweight laptop for video editing, graphic design, and creation needs. i7 or i9 CPU, GTX or RTX GPU, 4K OLED display certified by X-Rite Pantone.
+                            </p>
+                            <div class="top-down trans-delay-0-6">
+                                <button class="btn-flat btn-hover">
+                                    <span><a href="shop.php">explore now</a></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img top-down">
+                        <img src="img/laptop.png" alt="">
+                    </div>
+                </div>
+                <!-- end slide item -->
+                <!-- slide item -->
+                <div class="slide">
+                    <div class="info">
+                        <div class="info-content">
+                            <h3 class="top-down">
+                                JBL TUNE 660NC
+                            </h3>
+                            <h2 class="top-down trans-delay-0-2">
+                              Noise Cancelling
+
+                            </h2>
+                            <p class="top-down trans-delay-0-4">
+                              Listen wirelessly for 44 hours with active noise cancelling for long-lasting fun. Or for up to 55 hours with BT only. Get 2 hours extra with just a 5-minute charge using the convenient USB Type-C cable. Enjoy endlessly in wired mode, using the detachable cable provided.
+                            </p>
+                            <div class="top-down trans-delay-0-6">
+                                <button class="btn-flat btn-hover">
+                                    <span><a href="shop.php">explore now</a></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img right-left">
+                        <img src="img/headphone.png" alt="">
+                    </div>
+                </div>
+                <!-- end slide item -->
+                <!-- slide item -->
+                <div class="slide">
+                    <div class="info">
+                        <div class="info-content">
+                            <h3 class="top-down">
+                                IPHONE XR
+                            </h3>
+                            <h2 class="top-down trans-delay-0-2">
+                                A12 Bionic Chip
+                            </h2>
+                            <p class="top-down trans-delay-0-4">
+                                Featuring A12 Bionic Chip, 6.1-Inch Liquid Retina Display, Aluminum and Glass Design in Six Beautiful Finishes, Face ID and Advanced Camera System
+                            </p>
+                            <div class="top-down trans-delay-0-6">
+                                <button class="btn-flat btn-hover">
+                                    <span><a href="shop.php">explore now</a></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img left-right">
+                        <img src="img/phone.png" alt="">
+                    </div>
+                </div>
+                <!-- end slide item -->
+            </div>
+            <!-- slider controller -->
+            <button class="slide-controll slide-next">
+                <i class='bx bxs-chevron-right'></i>
+            </button>
+            <button class="slide-controll slide-prev">
+                <i class='bx bxs-chevron-left'></i>
+            </button>
+            <!-- end slider controller -->
         </div>
-        </div>
-        <div class="second-category">
-          <img src="img\Category2.jpg" alt="">
-        <div class="middle">
-          <div class="category-text">Category 2</div>
-        </div>
-        </div>
-        <div class="third-category">
-          <img src="img\Category3.jpg" alt="">
-          <div class="middle">
-          <div class="category-text">Category 3</div>
-        </div>
-        </div>
-      </div>
     </div>
-  </section>
+    <!-- end hero section -->
+
    <!--------In-store advertisement -->
    <section class="advertisement">
      <div class="ads">
@@ -361,9 +369,12 @@ display: none;
 </section>
     
 </body> 
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 <?php 
     require('./includes/footer.php');
     require ('./includes\scripts.php');
+   
 ?>
 
 </html>

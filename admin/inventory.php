@@ -5,8 +5,33 @@
    require('./includes/navbar.php'); 
    require('./includes/sidebar.php'); 
    require('./includes/database.php');
+   require('./includes/scripts.php'); 
 
+
+  
  ?>
+ <script type = "text/javascript">
+     $(document).ready(function(){
+
+            var html = '<tr><td><input type="text" class="form-control" name="txtVariation[]" required= ""></td><td><input type="number"  class="form-control" name="txtStock[]" required= ""></td><td><input type="button"  class="btn btn-danger" name="remove" id="remove" value= "Remove"></td></tr>';
+
+
+            var max= 5;
+            var x=1;
+
+            $("#add").click(function(){
+                  if (x <= max) {
+                    $("#table-field").append(html);
+                    x++;    
+                  }
+            });
+            $("#table-field").on('click', '#remove', function(){
+                    $(this).closest('tr').remove();
+                    x--;
+            });
+     });
+
+ </script>          
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid ">
@@ -22,6 +47,74 @@
 
                 </div><!-- col fin-->
             </div><!-- row finish -->
+
+            <div class = "container border mb-5 shadow p-3 mb-5 bg-white rounded"  >
+            <div class="container-fluid">
+                <form class="insert-form" id="insert-form" method="post" action="">
+                <div class="input-field">
+                    <table class="table" id="table-field">
+                        <tr>
+                            <td class = "" > <b> SELECT THE PRODUCT YOU WANT TO ADD A VARIATION & STOCK:</b></td>
+                            <td colspan = "2"> <select class = "form-control" name="Inv_product" required>
+                            <option value="" disabled selected>Select Product</option>
+                                <?php 
+                                    $querygetPro = "SELECT * FROM products";
+                                    $sqlgetPro = mysqli_query($connection, $querygetPro);
+                                    while($rowgetPro = mysqli_fetch_array($sqlgetPro)){
+                                            $product_id = $rowgetPro['product_id'];
+                                            $product_name = $rowgetPro['product_name'];
+                                ?>
+                                        <option value="<?php echo $product_id; ?>"><?php echo $product_name; ?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th>Variation</th>
+                            <th>Stock</th>
+                            <th>Add or Remove</th>
+                        </tr>
+                      
+                        <!-- ADD VARIATION STOCK SHITS -->
+                        <?php 
+                            if(isset($_POST['save'])){
+                                $txtVariation = $_POST['txtVariation'];
+                                $txtStock = $_POST['txtStock'];
+                                $Inv_product = $_POST['Inv_product'];
+
+                                foreach ($txtVariation as $key => $value) {
+                                    $querySave ="INSERT INTO product_item(product_item_id,product_id,product_item_variation,product_item_quantity)VALUES(null, '$Inv_product', '".$value."', '".$txtStock[$key]."')";
+
+                                    $sqlSave = mysqli_query($connection, $querySave);
+
+                                    if($sqlSave){
+                                        echo ' <script>   swal({
+                                            title: "Data Saved! ",
+                                            text: "The variation & stock is saved successfully.",
+                                            icon: "success",
+                                            button: false,  
+                                            timer :1700,
+                                          }); 
+                                          </script> ';
+                                    }
+                                }
+                            }
+                        ?>
+                      
+                        <tr>
+                            <td><input type="text" class="form-control" name="txtVariation[]" required= ""></td>
+                            <td><input type="number"  class="form-control" name="txtStock[]" required= ""></td>
+                            <td><input type="button" class="btn btn-primary px-4" id="add" name = "add" value= "Add"></td>
+                        </tr>
+                    </table>
+                    <center>
+                    <input type="submit"  class="btn btn-success mb-3" name="save" id="save" value= "Save Data">
+                    </center>
+                </div>
+                                </form>
+            </div>
+            </div>
            
 
                 <div class="container-fluid"><!-- col 3 beg -->
@@ -37,7 +130,6 @@
                         <th scope="col">Product ID</th>
                         <th scope="col">Image</th>
                         <th scope="col">Title</th>
-                        <th scope="col">Product Availability</th>
                         <th scope="col">Category</th>
                         <th scope="col">Variation & Stock</th>
 
@@ -60,17 +152,6 @@
                                 <td><?php echo $viewpctr; ?></td>
                                 <td><img src="product_images/<?php echo $rowpInventory['product_img1'];?>" width="80" height="80"></td>
                                 <td><?php echo $rowpInventory['product_name'];?></td>
-                             <?php   $badgecolor1;
-                                       $coloravail1= $rowpInventory['product_availability'];
-                                       if($coloravail1 == "Available") {
-                                           $badgecolor1 = "success";
-                                       }else{
-                                           $badgecolor1= "danger";
-                                       }
-                            ?>
-                                <td><span  class="badge alert-<?php echo $badgecolor1; ?>"><?php echo $rowpInventory['product_availability'];?></span></td>
-
-                               
                                 <?php 
                                 //product_category database
                                 $queryCategory = "SELECT * FROM product_categories WHERE product_category_id = '$cat_id'";
@@ -124,17 +205,10 @@
                                       </td>  
                                          
                                      <td>
-                                           <div class="btn-group">
-                                               <button class="btn btn-secondary btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Actions
-                                               </button>
-                                               <div class="dropdown-menu">
-                                                 <form>
-                                                     <input class="dropdown-item" type="submit" value="Add stock">
-                                                     <input class="dropdown-item" type="submit" value="Make product unavailable">
-                                                 </form>
-                                               </div>
-                                          </div>
+                                            <form action="addstock.php" method="post" >
+                                                     <input class="btn btn-primary"  name = "add-stock" type="submit"  value="Add stock">
+                                                     <input type="hidden" name="add-proid" value="<?php echo $pro_id ;?>">
+                                            </form>
                                     </td>
                                      </tr>  
                                      <?php   
@@ -152,7 +226,6 @@
         
 </div>                
 <?php 
- require('./includes/scripts.php'); 
  require('./includes/session.php');
 
  if($_SESSION['user'] !== 'admin'){

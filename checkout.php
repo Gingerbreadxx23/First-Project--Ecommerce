@@ -160,6 +160,7 @@
           <div id="paypal-button-container"></div>
      </div>
 </div>
+
     <?php 
         $queryShipinfo = "SELECT * FROM customers WHERE cust_id ='$checkout_cust_id'";
         $sqlShipinfo = mysqli_query($connection, $queryShipinfo);
@@ -281,7 +282,7 @@
 
           if(isset($_POST["place_order"])){
             $POpayment = $_POST['payment'];
-              if($POpayment == "online"){
+              if($POpayment == "Paypal"){
                  echo "<script>togglePopup();</script>";
               }else{
               $POcust_id = $_POST['customerid'];

@@ -74,7 +74,7 @@
                 <p>Variation: <select name="variation">
                 <?php 
                                //PRODUCT VARIATION
-                    $queryProductVariation = "SELECT * FROM product_item WHERE product_id = $product_id AND product_item_availability= 'Available'" ;
+                    $queryProductVariation = "SELECT * FROM product_item WHERE product_id = $product_id" ;
                     $sqlProductVariation = mysqli_query($connection,$queryProductVariation);
                    while( $rowProductVariation = mysqli_fetch_array($sqlProductVariation)){
 
