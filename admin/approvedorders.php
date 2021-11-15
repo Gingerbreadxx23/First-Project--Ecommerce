@@ -1,5 +1,6 @@
 <h3 class = "my-3" >Approved Orders</h3>
 <?php 
+      require('./includes/scripts.php'); 
        require('./includes/database.php');
       $queryviewPendingOrders ="SELECT * FROM `orders` WHERE `order_status` = 'approved';";
       $sqlviewPendingOrders = mysqli_query($connection, $queryviewPendingOrders);
@@ -12,6 +13,7 @@
             $custInfo = $rowviewPendingOrders['cust_id'];
             $orderID = $rowviewPendingOrders['order_id'];
             $orderStatus = $rowviewPendingOrders['order_status'];
+            
         ?>
          <!-- ORDER_ITEM DATABASE  -->     
           
@@ -82,7 +84,9 @@
               <input type="submit" style="width:150px; height:40px;" name="cancel" class="btn btn-danger mx-1 " value="Cancel"/><br>
               </form>
 
-              <form action="" method ="post">
+              <form action="receipt.php" target="_blank" method ="post">
+              <input type="hidden" name="hidden-custid" value="<?php echo $custInfo;?>">
+              <input type="hidden" name="hidden-orderid" value="<?php echo $orderID;?>">
               <input type="submit" style="width:150px; height:40px;" name="order-receipt" class="btn btn-warning mx-1 " value="Order Receipt"/><br>
               </form>
 
@@ -90,6 +94,8 @@
           </div> 
           <?php    }
       }
+
+    
 
       if($_SESSION['user'] !== 'admin'){
         echo "<script>window.location.href ='../login.php'</script>";

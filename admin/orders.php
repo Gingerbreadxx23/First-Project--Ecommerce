@@ -5,6 +5,7 @@
    require('./includes/navbar.php'); 
    require('./includes/sidebar.php'); 
    require('./includes/database.php');
+   require('./includes/scripts.php'); 
 
     $Pendingctr;
     $Approvedctr;
@@ -99,8 +100,7 @@
 
                 
     </div>
-
-            
+     
 <?php 
 // PENDING APPROVE BUTTON
     if(isset($_POST['approve'])){
@@ -109,8 +109,16 @@
         $sqlApprove = mysqli_query($connection, $queryApprove);
     
         if($sqlApprove){
-          echo "<script>alert('Order Approved!')</script>";
-          echo "<script>window.location.href ='./orders.php'</script>";
+         echo ' <script>   swal({
+                            title: "Order Approved! ",
+                            text: "You have approved an order successfully",
+                            icon: "success",
+                            button: false,  
+                            timer :2000,
+                          }).then(function() {
+                            window.location = "orders.php";
+                        });
+                          </script> ';
         }
       } 
 // PENDING CANCEL BUTTON
@@ -120,8 +128,16 @@
         $sqlCancel = mysqli_query($connection, $queryCancel);
     
         if($sqlCancel){
-          echo "<script>alert('Order Cancelled!')</script>";
-          echo "<script>window.location.href ='./orders.php'</script>";
+            echo   ' <script>   swal({
+                title: "Order Cancelled! ",
+                text: "You have cancelled an order successfully",
+                icon: "success",
+                button: false,  
+                timer :2000,
+              }).then(function() {
+                window.location = "orders.php";
+            });
+              </script> ';
         }
       } 
 //APPROVED PROCESS BUTTON
@@ -131,13 +147,36 @@
         $sqlProcess = mysqli_query($connection, $queryProcess);
     
         if($sqlProcess){
-          echo "<script>alert('Order is being processed!')</script>";
-          echo "<script>window.location.href ='./orders.php'</script>";
+            echo   ' <script>   swal({
+                title: "Order Proccessed! ",
+                text: "Order is being processed",
+                icon: "success",
+                button: false,  
+                timer :2000,
+              }).then(function() {
+                window.location = "orders.php";
+            });
+              </script> ';
 
         //   FOR INVENTORY 
-
+        $newquantity =0;
+        $oldquantity = 0;
         $querygetorderQ = "SELECT * FROM order_items WHERE order_id = '$ordercode'";
         $sqlgetorderQ = mysqli_query($connection,$querygetorderQ);
+        while ($rowgetorderQ = mysqli_fetch_array($sqlgetorderQ)){
+                $prodid = $rowgetorderQ['product_id'];
+                $orderQ = $rowgetorderQ['order_item_quantity'];
+                $orderV = $rowgetorderQ['order_item_variation'];
+
+            $querygetItem = "SELECT * FROM product_item WHERE product_id='$prodid' AND product_item_variation ='$orderV'";
+            $sqlgetItem = mysqli_query($connection,$querygetItem);
+            $rowgetItem =mysqli_fetch_array($sqlgetItem);
+            $oldquantity  = $rowgetItem['product_item_quantity'];
+
+             $newquantity = $oldquantity-$orderQ;
+              $querynewQ = "UPDATE product_item SET product_item_quantity=' $newquantity' WHERE product_id='$prodid' AND product_item_variation ='$orderV'";
+              $sqlnewQ = mysqli_query($connection,$querynewQ);
+        }
         }
       } 
 //PROCESSING SHIPPED BUTTON
@@ -147,8 +186,16 @@ if(isset($_POST['shipped'])){
     $sqlShipped = mysqli_query($connection, $queryShipped);
 
     if($sqlShipped){
-      echo "<script>alert('Order is Shipped!')</script>";
-      echo "<script>window.location.href ='./orders.php'</script>";
+      echo  ' <script>   swal({
+            title: "Order Shipped! ",
+            text: "You have shipped an order successfully",
+            icon: "success",
+            button: false,  
+            timer :2000,
+          }).then(function() {
+            window.location = "orders.php";
+        });
+          </script> ';
     }
   } 
 //ONGOING COMPLETE BUTTON
@@ -158,11 +205,18 @@ if(isset($_POST['complete'])){
     $sqlComplete = mysqli_query($connection, $queryComplete);
 
     if($sqlComplete){
-      echo "<script>alert('Order is Completed!')</script>";
-      echo "<script>window.location.href ='./orders.php'</script>";
+        echo   ' <script>   swal({
+            title: "Order Completed! ",
+            text: "You have completed an order successfully",
+            icon: "success",
+            button: false,  
+            timer :2000,
+          }).then(function() {
+            window.location = "orders.php";
+        });
+          </script> ';
     }
   } 
- require('./includes/scripts.php'); 
  require('./includes/session.php');
  // AVOID ACCESS FROM ACCOUNTS
 if($_SESSION['user'] !== 'admin'){

@@ -26,7 +26,7 @@
                     </div><!-- row finish -->
 
                     <div class="row"><!-- row 2 begin -->
-                        <div class="col-lg-3 col-md-6"><!-- col 2 beg -->
+                        <div class="col-lg-4 col-md-6"><!-- col 2 beg -->
                             <div class="panel panel-primary"><!-- panel primary beg-->
                             
                             <div class="panel-header"><!-- panel header beg-->
@@ -59,7 +59,7 @@
                         <!-- SECOND CARD -->
 
                         </div><!-- col 2 fin -->
-                        <div class="col-lg-3 col-md-6"><!-- col 2 beg -->
+                        <div class="col-lg-4 col-md-6"><!-- col 2 beg -->
                             <div class="panel panel-primary"><!-- panel primary beg-->
                             
                             <div class="panel-header"><!-- panel header beg-->
@@ -92,7 +92,7 @@
 
                             <!-- THIRD CARD ---->
                             </div><!-- col 2 fin -->
-                        <div class="col-lg-3 col-md-6"><!-- col 2 beg -->
+                        <div class="col-lg-4 col-md-6"><!-- col 2 beg -->
                             <div class="panel panel-primary"><!-- panel primary beg-->
                             
                             <div class="panel-header"><!-- panel header beg-->
@@ -125,28 +125,6 @@
 
                             <!-- FOURTH CARD -->
                             </div><!-- col 2 fin -->
-                        <div class="col-lg-3 col-md-6"><!-- col 2 beg -->
-                            <div class="panel panel-primary"><!-- panel primary beg-->
-                            
-                            <div class="panel-header"><!-- panel header beg-->
-
-                                <div class="row"><!-- row 3 begin -->
-
-                                    <div class="col-xs-3"><!-- col 3 beg -->
-                                        <div class="card bg-danger text-white mb-4"> <!-- card beg-->
-                                        <div class="card-body"><i class="fas fa-clipboard-list"></i> Orders <div> 25</div></div>
-                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                <a class="small text-white stretched-link" href="index.php?view_orders">View Details</a>
-                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                        </div>
-                                        </div>  
-                                    </div><!-- col 3 fin -->
-
-                                    
-                                </div><!-- row 2 fin -->
-                            </div><!-- panel header fin-->
-                            </div> <!-- panel primary fin -->
-
                         </div><!-- col 2 fin -->
                     </div><!-- row 2 fin -->
                                 <div class="row">

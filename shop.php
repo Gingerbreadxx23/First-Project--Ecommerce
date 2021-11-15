@@ -30,7 +30,7 @@
         </div>
         <div class="container4">
         <?php  
-                $query = "SELECT * FROM products ORDER BY product_id ASC";  
+                $query = "SELECT * FROM products WHERE product_availability= 'Available'";  
                 $result = mysqli_query($connection, $query);  
                      while($row = mysqli_fetch_array($result))  
                      {  

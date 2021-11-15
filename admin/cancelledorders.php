@@ -1,5 +1,6 @@
 <h3 class = "my-3 ">Cancelled Orders</h3>
 <?php 
+      require('./includes/scripts.php'); 
        require('./includes/database.php');
       $queryviewPendingOrders ="SELECT * FROM `orders` WHERE `order_status` = 'cancelled';";
       $sqlviewPendingOrders = mysqli_query($connection, $queryviewPendingOrders);
@@ -74,7 +75,9 @@
           </div>
           <div class="d-flex justify-content-end mb-2  ">
 
-              <form action="" method ="post">
+          <form action="receipt.php" target="_blank" method ="post">
+              <input type="hidden" name="hidden-custid" value="<?php echo $custInfo;?>">
+              <input type="hidden" name="hidden-orderid" value="<?php echo $orderID;?>">
               <input type="submit" style="width:150px; height:40px;" name="order-receipt" class="btn btn-warning mx-1 " value="Order Receipt"/><br>
               </form>
 
