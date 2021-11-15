@@ -145,22 +145,22 @@
  <?php 
     require('./includes\header.php');
     require('./includes\database.php');
-    require ('./includes\scripts.php');
     require ('./includes\session.php');
-    
+    require ('./includes\scripts.php');
+
       $checkout_cust_id = $_SESSION['cust_id'];
  ?>
  <body>
-   
-<script src = "js/paypal.js"></script>
- <div class= "popup" id= "oti">
+   <!-- PAYPALLLL -->
+   <script src = "js/paypal.js"></script>
+  <div class= "popup" id= "oti">
      <div class="overlay" onClick="togglePopup()"></div>
      <div class="content">
           <h1>Pay Online</h1>
           <div id="paypal-button-container"></div>
      </div>
 </div>
-
+<script>paypal.Buttons().render('#paypal-button-container');</script>
     <?php 
         $queryShipinfo = "SELECT * FROM customers WHERE cust_id ='$checkout_cust_id'";
         $sqlShipinfo = mysqli_query($connection, $queryShipinfo);
