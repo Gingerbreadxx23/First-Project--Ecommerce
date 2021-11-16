@@ -1,4 +1,4 @@
-<?php//VARIABLES FROM DATABASE
+<?php
  $firstname = $_SESSION['cust_firstName'];
  $lastname =  $_SESSION['cust_lastName'];
  $email    =  $_SESSION['cust_email'];

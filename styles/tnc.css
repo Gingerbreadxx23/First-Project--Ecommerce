@@ -11,7 +11,7 @@
   min-height: 100%;
  
 }
- /*----BUTTONS--*/ 
+
  .btns{
   background-color: rgb(82, 80, 79);
   color:rgb(255, 255, 255);
@@ -31,7 +31,7 @@
   
 }
 
-/*NAVIGATION */
+
 
 header{
   top: 0;
@@ -88,7 +88,7 @@ cursor: pointer;
 display: none;
 }
 
-/*----------tnc ------*/
+
 h1{
 
     margin: 50px 50px;
@@ -110,7 +110,7 @@ text-align: left;
     margin-left: auto;
     margin-right: auto;
 }
-/* --------FOOTER------*/
+
 .footer{
  background: rgb(0, 0, 0);
  color: white;
@@ -175,4 +175,3 @@ text-align: left;
    width: 100%;
    text-align: center;
  }
-<bodu

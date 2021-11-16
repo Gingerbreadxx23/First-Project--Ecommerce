@@ -367,14 +367,15 @@ display: none;
      </div>
    </section>
 </section>
-    
+<?php 
+   require ('./includes\scripts.php');
+?>    
 </body> 
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <?php 
     require('./includes/footer.php');
-    require ('./includes\scripts.php');
-   
+  
 ?>
 
 </html>

@@ -8,7 +8,7 @@ font-family: "Poppins", sans-serif;
 body{
  min-height: 100%;
 }
-/*NAVIGATION */
+
 header{
     top: 0;
     left: 0;
@@ -57,7 +57,7 @@ header{
   cursor: pointer;
   display: none;
   }
-  /*----BUTTONS--*/ 
+ 
  .btns{
     background-color: rgb(82, 80, 79);
     color:rgb(255, 255, 255);
@@ -74,7 +74,7 @@ header{
     color: rgb(34, 33, 33); ;
     
   }
-  /*-----------ABOUT US---------*/
+  
   .about-section {
   
   padding: 40px;
@@ -127,7 +127,7 @@ header{
   margin-top:10px;
   
   }
-  /*----------CART ------*/
+ 
   .cart-btns{
     background-color: rgb(82, 80, 79);
     color:rgb(255, 255, 255);
@@ -151,10 +151,7 @@ header{
   table{
       width:100%;
       border-collapse:collapse;
-  	/* margin-left:120px;
-      margin-right:155px;
-      margin-bottom:30px;
-      margin-top:20px; */
+  
   }
   .cart-info{
       display:flex;
@@ -213,7 +210,7 @@ header{
     background-color: rgb(218, 218, 218);
     color: rgb(34, 33, 33); ;
   }
-  /*------------CONTACT US---------*/
+ 
 .contact-us-section{
     padding: 40px;
   
@@ -271,7 +268,7 @@ header{
   width: 50%;
 }
   
-  /*----------LOGIN FORM---- */
+  
 .login-section{
     
     background: rgba(0, 0, 0, 0.068);
@@ -347,7 +344,7 @@ header{
  .login-box .create-acc a:hover{
     margin-left: 8px;
     transition: 0.4s;
- }/*------------CREATE ACCOUNT---------*/
+ }
 .create-account-section{
     padding: 40px;
 }
@@ -401,7 +398,7 @@ header{
   margin-left: 32%;
 }
 
-/*----------ACCOUNTS -------------*/
+
 
   
   .flex-container {
@@ -447,7 +444,7 @@ header{
   }
   
   
-  /* Responsive layout - makes a one column-layout instead of a two-column layout */
+  
   @media (max-width: 800px) {
     .flex-item-right, .flex-item-left {
       flex: 100%;
@@ -460,7 +457,7 @@ header{
   }
   
   }
-/*----------FOOTER -------------*/
+
 .footer{
     margin-top: 100px;
     background: rgb(0, 0, 0);

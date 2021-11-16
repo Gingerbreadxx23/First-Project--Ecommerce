@@ -55,7 +55,7 @@
 								   <th width="20%" >Item total</th>  
 								   <th width="5%"></th>  
 							  </tr>  	 	 
-							<!-- CLICKED CART -->
+							
 							<?php   
 									 	$cart_custid = $_SESSION['cust_id'];
 
@@ -87,7 +87,7 @@
 									 <tr>  
 								   <td>
 									   <?php 
-									 		// PRODUCTS DATABASE QUERY
+									 		
 											 $querycartProduct = "SELECT * FROM products WHERE product_id= $cart_pro_id ";
 											 $sqlcartProduct= mysqli_query($connection, $querycartProduct);
 											 $rowcartProduct =mysqli_fetch_array($sqlcartProduct);
@@ -98,7 +98,7 @@
 								   <td> <?php  echo $rowFetchcart['cart_item_quantity']; ?></td>
 								   <td>
 									   <?php 
-									   		//PRODUCT_ITEM DATABASE
+									   		
 											$querycartVariation ="SELECT * FROM product_item WHERE product_item_id= $cart_pro_item_id";
 											$sqlcartVariation = mysqli_query($connection,$querycartVariation);
 											$rowcartVariation = mysqli_fetch_array($sqlcartVariation);

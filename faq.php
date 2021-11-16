@@ -5,13 +5,13 @@
 <?php
   require ('./includes\header.php');
 ?>
- <!--faq--------------> 
+ 
     
 <body>
     <h1 style="text-align: center;">Frequently Asked Questions</h1>
     <div class="wrapper">
         
-      <!-- 1st -->
+      
       <div class="parent-tab">
         <input type="radio" name="tab" id="tab-1" checked>
         <label for="tab-1">
@@ -25,7 +25,7 @@
         </div>
       </div>
   
-      <!-- 2ND -->
+      
       <div class="parent-tab">
         <input type="radio" name="tab" id="tab-2">
         <label for="tab-2">
@@ -38,7 +38,7 @@
         </div>
       </div>
   
-      <!-- 3RD -->
+    
       <div class="parent-tab tab-3">
         <input type="radio" name="tab" id="tab-3">
         <label for="tab-3" class="tab-3">
@@ -46,7 +46,7 @@
           <div class="icon"><i class="fas fa-plus"></i></div>
         </label>
         <div class="content">
-          <!-- 3RD.1 -->
+         
           <div class="child-tab">
             <input type="checkbox" name="sub-tab" id="tab-4">
             <label for="tab-4">
@@ -59,7 +59,7 @@
                 et.</p>
             </div>
           </div>
-          <!-- 3.2 -->
+         
           <div class="child-tab">
             <input type="checkbox" name="sub-tab" id="tab-5">
             <label for="tab-5">
@@ -75,7 +75,7 @@
         </div>
       </div>
   
-      <!-- 4TH -->
+   
       <div class="parent-tab">
         <input type="radio" name="tab" id="tab-6">
         <label for="tab-6">

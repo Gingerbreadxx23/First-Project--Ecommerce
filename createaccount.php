@@ -7,7 +7,7 @@
   require ('./includes\scripts.php');
 
 
- if(isset($_POST['register'])){ // GET VALUES OF INPUT
+ if(isset($_POST['register'])){ 
    $firstname = $_POST['firstname'];
    $lastname = $_POST['lastname'];
    $email = $_POST['email'];
@@ -63,7 +63,7 @@
 
 ?>
   <body>
-      <!--------- CREATE ACCOUNT ---------->
+      
      
       <section class="create-account-section">
         <form action="createaccount.php" method="POST">

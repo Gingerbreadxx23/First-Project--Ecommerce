@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="styles/style.css">
 <?php
   require ('./includes\header.php');
-  require ('./includes\session.php');//Avoid access after logging out
+  require ('./includes\session.php');
   require ('./includes\database.php');
   require ('./includes\scripts.php');
 
@@ -41,7 +41,7 @@
  
 ?>
 <body>
- <!-- products content -->
+
  <div class="bg-main">
         <div class="container">
             <div class="box">
@@ -72,7 +72,7 @@
                         <div class="box filter-toggle-box">
                             <button class="btn-flat btn-hover" id="filter-toggle">filter</button>
                         </div>
-                        <!-- display Information -->
+                        
                         <div class="box">
                           <div class="billinginfo" id="billinginfo">
                             <div class="row">
@@ -89,7 +89,7 @@
                           </div>
                         </div>
 
-                          <!-- display orderstatus -->
+                        
                         <div class="orderstatus" id="orderstatus">
                           <div class="row">
                             <div class="column">
@@ -99,7 +99,7 @@
                                <th> Total </th>
                                <th> Status </th>
                                <th> Action </th>
-                              <!-- ORDER DATABASE  -->
+                             
                               <?php 
                                     $queryorderStatus = "SELECT * FROM orders WHERE order_status NOT IN('cancelled','completed') AND cust_id= '$custid'";
                                     $sqlorderStatus = mysqli_query($connection, $queryorderStatus);
@@ -128,7 +128,7 @@
                                  <?php }} ?>
                                  </td>
                                  <?php 
-                                  // CANCEL BUTTON
+                                  
                                        $cancelstatus =$roworderStatus['order_status'];
                                  ?>
                                  <td align="center"><small>Php  <?php echo number_format($roworderStatus['order_total']);?></small></td>
@@ -148,7 +148,7 @@
                         </div>
                       </div>
 
-                        <!-- display orderhistory -->
+                       
                       <div class="orderhistory" id="orderhistory">
                         <div class="row">
                           <div class="column">
@@ -197,7 +197,7 @@
                       </div>
 
 
-                    <!-- display canncelled/refunded -->
+                   
                   <div class="orderhistory" id="cancelledrefundedorder">
                     <div class="row">
                       <div class="column">
@@ -247,15 +247,13 @@
                       </div>
 
                       </div>
-                    <!-- end display Information -->
+                   
                 </div>
             </div>
         </div>
     </div>
     <br/><br/><br/>
-    <!-- end products content -->
-
-    <!-- app js -->
+  
 
 <script>
 var billing = document.getElementById("bill");
@@ -300,7 +298,7 @@ cancelled.onclick = function() {
 </body>
 <?php 
   require ('./includes\footer.php');
-  // AVOID ACCESS FROM admin
+ 
   if($_SESSION['user'] !== 'customer'){
    echo "<script>window.location.href ='login.php'</script>";
   }

@@ -151,7 +151,7 @@
       $checkout_cust_id = $_SESSION['cust_id'];
  ?>
  <body>
-   <!-- PAYPALLLL -->
+   
    <script src = "js/paypal.js"></script>
   <div class= "popup" id= "oti">
      <div class="overlay" onClick="togglePopup()"></div>
@@ -299,12 +299,12 @@
                 $Ordercust_id = $rowCart_order['cust_id'];
                 $Orderitemquantity = $rowCart_order['cart_item_quantity'];  
 
-                // QUERY FOR ORDERS TABLE
+               
                 $queryPlaceorder = "INSERT INTO orders VALUES (null,' $Ordercust_id', CURRENT_TIMESTAMP, '$POordertotal', '$POpayment', '$POorderstatus' )";
                 $sqlPlaceorder = mysqli_query($connection,$queryPlaceorder);
 
                 if($sqlPlaceorder){
-                    //QUERY GETTING ORDER VALUES
+                   
                     $queryGetOrder = "SELECT * FROM orders WHERE cust_id =  '$Ordercust_id' AND  order_total ='$POordertotal' ";
                     $sqlGetOrder = mysqli_query($connection, $queryGetOrder);
                     $rowGetorder = mysqli_fetch_array($sqlGetOrder);
@@ -330,7 +330,7 @@
  
 
                       }
-                        // DELETE CART ITEMS
+                        
                         $queryDeletecartItems = "DELETE FROM cart WHERE cust_id ='$POcust_id' ";
                         $sqlDeletecartItems = mysqli_query($connection,$queryDeletecartItems);
 
